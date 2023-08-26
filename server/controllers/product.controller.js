@@ -11,6 +11,7 @@ const createProduct = asyncHandler(async (req, res) => {
     createdProduct: newProduct ? newProduct : "Cannot create new product",
   });
 });
+
 const getProduct = asyncHandler(async (req, res) => {
   const { pid } = req.params;
   const product = await Product.findById(pid);

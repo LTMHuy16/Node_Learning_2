@@ -1,6 +1,6 @@
 const { checkSchema } = require("express-validator");
 
-const userRegisterValidator = [
+const register = [
   checkSchema(
     {
       email: {
@@ -29,7 +29,7 @@ const userRegisterValidator = [
   ),
 ];
 
-const userLoinValidator = [
+const login = [
   checkSchema(
     {
       email: {
@@ -44,4 +44,55 @@ const userLoinValidator = [
   ),
 ];
 
-module.exports = { userRegisterValidator, userLoinValidator };
+const forgotPassword = [
+  checkSchema(
+    {
+      email: {
+        notEmpty: { errorMessage: "Email must be required.", bail: true },
+        isEmail: { errorMessage: "Email is invalid." },
+      },
+    },
+    ["query"]
+  ),
+];
+
+const resetPassword = [
+  checkSchema(
+    {
+      token: {
+        notEmpty: { errorMessage: "Token must be required.", bail: true },
+      },
+      password: {
+        notEmpty: { errorMessage: "Password must be required.", bail: true },
+      },
+    },
+    ["body"]
+  ),
+];
+
+const deleteUser = [
+  checkSchema(
+    {
+      _id: {
+        notEmpty: { errorMessage: "_id must be required.", bail: true },
+        isMongoId: { errorMessage: "_id must be mongoose id." },
+      },
+    },
+    ["params"]
+  ),
+];
+
+const update = [
+  checkSchema(
+    {
+      
+      _id: {
+        notEmpty: { errorMessage: "_id must be required.", bail: true },
+        isMongoId: { errorMessage: "_id must be mongoose id." },
+      },
+    },
+    ["body"]
+  ),
+];
+
+module.exports = { register, login, forgotPassword, resetPassword, deleteUser, update };

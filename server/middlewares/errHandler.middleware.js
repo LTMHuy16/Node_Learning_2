@@ -5,7 +5,6 @@ const notFound = (req, res, next) => {
 };
 
 const errHandler = (error, req, res, next) => {
-  console.log(error);
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   return res.status(statusCode).json({
     success: false,
